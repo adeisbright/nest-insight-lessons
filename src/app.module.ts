@@ -4,13 +4,17 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './datasource/mysql/database/database.module';
 import { RequestLabeller } from './middleware/request-label';
+import { AuthModule } from './feature/auth/auth.module';
+import { UserModule } from './feature/user/user.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal :  true
     }),
-    DatabaseModule
+    DatabaseModule,
+    AuthModule , 
+    UserModule
   ],
   controllers: [AppController],
   providers: [AppService],
