@@ -1,8 +1,9 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './datasource/mysql/database/database.module';
+import { RequestLabeller } from './middleware/request-label';
 
 @Module({
   imports: [
@@ -14,4 +15,9 @@ import { DatabaseModule } from './datasource/mysql/database/database.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  async configure(consumer : MiddlewareConsumer){
+    consumer.apply(RequestLabeller)
+    .forRoutes({path : "" , method : RequestMethod.GET})
+  }
+}
