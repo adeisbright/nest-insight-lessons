@@ -5,7 +5,7 @@ import { User } from "@/datasource/mysql/entities/User";
 export class UserService {
    
     constructor(
-        private readonly sqlService : MysqlDataServices
+        private readonly sqlService : MysqlDataServices ,
     ){}
 
     async getUsers(){

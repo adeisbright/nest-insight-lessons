@@ -13,9 +13,9 @@ import { UserController } from "./user/user.controller";
             provide : MysqlDataServices,
             useClass : SqlService
         } , 
-        UserService
+        UserService ,
     ] , 
-    imports : [DatabaseModule]
+    imports : [DatabaseModule]  
 })
 
 export class FeatureModule {}
