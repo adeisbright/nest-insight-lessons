@@ -6,15 +6,14 @@ import { DatabaseModule } from './datasource/mysql/database/database.module';
 import { RequestLabeller } from './middleware/request-label';
 import { AuthModule } from './feature/auth/auth.module';
 import { UserModule } from './feature/user/user.module';
+import { FeatureModule } from './feature/feature.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal :  true
     }),
-    DatabaseModule,
-    AuthModule , 
-    UserModule
+    FeatureModule
   ],
   controllers: [AppController],
   providers: [AppService],

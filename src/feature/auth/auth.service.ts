@@ -19,7 +19,7 @@ export class AuthService{
         try{
             console.log("E reach here")
             const {username } = LoginDTO
-            return await this.userService.findOne(username)
+            return {} //await this.userService.findOne(username)
         }catch(e){
             throw new Error(e)
         }

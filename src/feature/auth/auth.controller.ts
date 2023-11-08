@@ -2,6 +2,7 @@ import { Controller, Post , Body  , UseGuards , Request , Req} from "@nestjs/com
 import { AuthService } from "./auth.service";
 import { LoginDTO } from "./login.dto";
 import { LocalAuthGuard } from "./local-auth.guard";
+import { PUBLIC } from "./public";
 
 @Controller("auth")
 export class AuthController {
@@ -9,6 +10,7 @@ export class AuthController {
         private readonly authService : AuthService
     ){}
 
+    @PUBLIC()
     @UseGuards(LocalAuthGuard)
     @Post("/login")
     async handleLogin(@Request() req  :any){

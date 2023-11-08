@@ -1,17 +1,17 @@
+import { MysqlDataServices } from "@/datasource/mysql/database/database.service";
 import { Injectable } from "@nestjs/common";
-
+import { User } from "@/datasource/mysql/entities/User";
 @Injectable() 
 export class UserService {
-    private users  = [
-        {
-            name : "Ade",
-            password : "123" , 
-            id : 1
-        }
-    ]
-    constructor(){}
+   
+    constructor(
+        private readonly sqlService : MysqlDataServices
+    ){}
 
-    async findOne(name:string){
-        return this.users.find(user => user.name === name)
+    async getUsers(){
+        const query = {}
+        const users = await this.sqlService.users.getAll(query,User , ["record.email" , "record.id"]) 
+        console.log(users) 
+        return users 
     }
 }
