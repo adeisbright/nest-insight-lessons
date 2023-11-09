@@ -8,20 +8,16 @@ import { SearchController } from './elastic.controller';
     ElasticsearchModule.registerAsync({
       useFactory: () => ({
         node: elasticConfig.node,
-        maxRetries: 10,
-        requestTimeout: 60000,
-        pingTimeout: 60000,
-        sniffOnStart: true,
         auth: {
-          username: elasticConfig.username,
+          username:elasticConfig.username,
           password: elasticConfig.password,
         },
       }),
     }),
   ],
-  providers: [SearchService ],
-  exports: [SearchService],
-  controllers : [SearchController]
+  providers: [],
+  exports: [ElasticsearchModule],
+  controllers : []
 })
 
 export class SearchModule{}

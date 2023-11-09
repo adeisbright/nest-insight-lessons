@@ -7,15 +7,14 @@ import { RequestLabeller } from './middleware/request-label';
 import { AuthModule } from './feature/auth/auth.module';
 import { UserModule } from './feature/user/user.module';
 import { FeatureModule } from './feature/feature.module';
-import { SearchModule } from './datasource/elasticsearch/elastic.module';
+import { SearchModule } from './datasource/search/elastic.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal :  true
     }),
-    FeatureModule , 
-    SearchModule
+    FeatureModule ,
   ],
   controllers: [AppController],
   providers: [AppService],

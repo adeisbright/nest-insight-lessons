@@ -4,6 +4,8 @@ import { mysqlProvider } from "@/datasource/mysql/providers/mysql.provider";
 import { Module } from "@nestjs/common";
 import { UserService } from "./user/user.service";
 import { UserController } from "./user/user.controller";
+import { SearchModule } from "@/datasource/search/elastic.module";
+import { ElasticsearchService } from "@nestjs/elasticsearch";
 
 @Module({
     controllers : [UserController],
@@ -15,7 +17,7 @@ import { UserController } from "./user/user.controller";
         } , 
         UserService ,
     ] , 
-    imports : [DatabaseModule]  
+    imports : [DatabaseModule , SearchModule]  
 })
 
 export class FeatureModule {}
