@@ -8,6 +8,7 @@ import { AuthModule } from './feature/auth/auth.module';
 import { UserModule } from './feature/user/user.module';
 import { FeatureModule } from './feature/feature.module';
 import { SearchModule } from './datasource/search/elastic.module';
+import { SocketModule } from './socket/socket.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { SearchModule } from './datasource/search/elastic.module';
       isGlobal :  true
     }),
     FeatureModule ,
+    SocketModule
   ],
   controllers: [AppController],
   providers: [AppService],
