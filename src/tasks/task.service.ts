@@ -1,15 +1,18 @@
 import { Injectable } from "@nestjs/common";
 import {Cron , CronExpression} from "@nestjs/schedule"
 import { LAGOS_TIMEZONE } from "@/constants";
+import {EventEmitter2} from "@nestjs/event-emitter"
 @Injectable() 
 export class TaskService {
-    constructor(){} 
+    constructor(
+        private readonly eventEmitter : EventEmitter2
+    ){} 
     @Cron(CronExpression.EVERY_30_SECONDS , {
         timeZone : LAGOS_TIMEZONE,
         name : "logMessage"
     }) 
     runEverySecond(){
-        console.log("Every Second Message")
+        this.eventEmitter.emit("email.drop")
     }
 
     @Cron(CronExpression.EVERY_MINUTE) 

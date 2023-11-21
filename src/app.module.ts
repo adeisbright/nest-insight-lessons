@@ -11,7 +11,8 @@ import { SearchModule } from './datasource/search/elastic.module';
 import { SocketModule } from './socket/socket.module';
 import {ScheduleModule} from "@nestjs/schedule"
 import { TaskService } from './tasks/task.service';
-
+import { EmailTask } from './tasks/email.task';
+import {EventEmitterModule} from "@nestjs/event-emitter"
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -19,10 +20,11 @@ import { TaskService } from './tasks/task.service';
     }),
     FeatureModule ,
     SocketModule,
-    ScheduleModule.forRoot()
+    ScheduleModule.forRoot(),
+    EventEmitterModule.forRoot()
   ],
   controllers: [AppController],
-  providers: [AppService,TaskService],
+  providers: [AppService,TaskService , EmailTask],
 })
 export class AppModule implements NestModule {
   async configure(consumer : MiddlewareConsumer){
