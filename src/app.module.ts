@@ -9,6 +9,8 @@ import { UserModule } from './feature/user/user.module';
 import { FeatureModule } from './feature/feature.module';
 import { SearchModule } from './datasource/search/elastic.module';
 import { SocketModule } from './socket/socket.module';
+import {ScheduleModule} from "@nestjs/schedule"
+import { TaskService } from './tasks/task.service';
 
 @Module({
   imports: [
@@ -16,10 +18,11 @@ import { SocketModule } from './socket/socket.module';
       isGlobal :  true
     }),
     FeatureModule ,
-    SocketModule
+    SocketModule,
+    ScheduleModule.forRoot()
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,TaskService],
 })
 export class AppModule implements NestModule {
   async configure(consumer : MiddlewareConsumer){
