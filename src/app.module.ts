@@ -14,8 +14,9 @@ import { TaskService } from './tasks/task.service';
 import { EmailTask } from './tasks/email.task';
 import {EventEmitterModule} from "@nestjs/event-emitter"
 import {BullModule} from "@nestjs/bull"
-import { bullConfig } from './config';
+import { bullConfig, mailConfig } from './config';
 import { QueueModule } from './queue/queue.module';
+import {MailerModule} from "@nestjs-modules/mailer"
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -26,7 +27,8 @@ import { QueueModule } from './queue/queue.module';
     ScheduleModule.forRoot(),
     EventEmitterModule.forRoot(),
     BullModule.forRoot(bullConfig),
-    QueueModule
+    QueueModule,
+    MailerModule.forRoot(mailConfig)
   ],
   controllers: [AppController],
   providers: [AppService,TaskService , EmailTask],
