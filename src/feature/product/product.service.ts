@@ -7,7 +7,7 @@ export class ProductService {
     constructor(
         private readonly sqlService : PgDataServices,
         private readonly tableService : TableService , 
-        private readonly schedulerRegistry : SchedulerRegistry
+        private readonly schedulerRegistry : SchedulerRegistry,
     ){}
 
     async getAllProducts(){

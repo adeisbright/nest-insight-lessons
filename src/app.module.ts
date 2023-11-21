@@ -13,6 +13,9 @@ import {ScheduleModule} from "@nestjs/schedule"
 import { TaskService } from './tasks/task.service';
 import { EmailTask } from './tasks/email.task';
 import {EventEmitterModule} from "@nestjs/event-emitter"
+import {BullModule} from "@nestjs/bull"
+import { bullConfig } from './config';
+import { QueueModule } from './queue/queue.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -21,7 +24,9 @@ import {EventEmitterModule} from "@nestjs/event-emitter"
     FeatureModule ,
     SocketModule,
     ScheduleModule.forRoot(),
-    EventEmitterModule.forRoot()
+    EventEmitterModule.forRoot(),
+    BullModule.forRoot(bullConfig),
+    QueueModule
   ],
   controllers: [AppController],
   providers: [AppService,TaskService , EmailTask],

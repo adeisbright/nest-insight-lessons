@@ -12,6 +12,8 @@ import { PgDataServices } from "@/datasource/pg/databases/database.service";
 import { SqlService,TableService } from "@/datasource/pg/databases/database.service";
 import { ProductService } from "./product/product.service";
 import { ProductController } from "./product/product.controller";
+import { QueueProducer } from "@/queue/producer";
+import { QueueModule } from "@/queue/queue.module";
 // @Module({
 //     controllers : [UserController],
 //     providers : [
@@ -35,7 +37,7 @@ import { ProductController } from "./product/product.controller";
         useClass : SqlService
        },
        TableService,
-       ProductService
+       ProductService,
     ] , 
     imports : [PgModule , SearchModule]  
 })
