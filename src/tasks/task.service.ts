@@ -12,7 +12,8 @@ export class TaskService {
         name : "logMessage"
     }) 
     runEverySecond(){
-        this.eventEmitter.emit("email.scan")
+        //this.eventEmitter.emit("email.scan")
+        this.eventEmitter.emit("email.drop")
     }
 
     @Cron(CronExpression.EVERY_MINUTE) 
@@ -30,7 +31,7 @@ export class TaskService {
     }) 
     runMidnight(){
         console.log(`Run at midnight, Now is ${new Date()}`)
-        this.eventEmitter.emit("email.drop")
+        
     }
 
     @Cron(CronExpression.EVERY_30_MINUTES , {

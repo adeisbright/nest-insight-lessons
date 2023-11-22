@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { PgDataServices,TableService } from "@/datasource/pg/databases/database.service";
 import { Product } from "@/datasource/pg/entities/product";
 import {SchedulerRegistry} from "@nestjs/schedule"
+import { Express } from "express";
 @Injectable()
 export class ProductService {
     constructor(
@@ -28,6 +29,17 @@ export class ProductService {
         const everySecondJob = this.schedulerRegistry.getCronJob("logMessage")
         everySecondJob.stop()
         return result 
+        }catch(e){
+            return {
+                message : e.message
+            }
+        }
+    }
+
+    async addProduct(body : any){
+        try{
+            
+        return body
         }catch(e){
             return {
                 message : e.message

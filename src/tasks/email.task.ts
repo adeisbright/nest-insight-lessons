@@ -11,11 +11,10 @@ export class EmailTask {
         await this.mailService.sendMail({
             to : "adenababanla@gmail.com",
             from:"adenababanla@gmail.com",
-            html : "<p>Welcome</p>"
-            // template : path.join(__dirname , "../templates/"  + "index"),
-            // context :{
-            //     name : "Adeleke Ipenko Bright"
-            // }
+            template : path.join(__dirname , "../templates/"  + "index"),
+            context :{
+                name : "Adeleke Ipenko Bright"
+            }
         })
     }
 }
