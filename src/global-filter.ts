@@ -14,6 +14,6 @@ export class GlobalErrorFilter implements ExceptionFilter{
             message : exception.message , 
             success : "error",
             path : request.url
-        })
+        }) 
     }
 }
