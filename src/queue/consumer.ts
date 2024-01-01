@@ -1,12 +1,12 @@
-import {Processor , Process} from "@nestjs/bull" 
-import {Job} from "bull"
+import { Processor, Process } from '@nestjs/bull';
+import { Job } from 'bull';
 
-@Processor("audio") 
+@Processor('audio')
 export class AudioConsumer {
-    constructor(){}
+  constructor() {}
 
-    @Process()
-    handleAudio(job :Job<unknown>){
-        console.log(job)
-    }
+  @Process()
+  handleAudio(job: Job<unknown>) {
+    console.log(job);
+  }
 }

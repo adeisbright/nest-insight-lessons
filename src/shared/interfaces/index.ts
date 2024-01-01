@@ -1,18 +1,18 @@
 export interface Cursor {
-    beforeCursor : string | null 
-    afterCursor : string | null 
+  beforeCursor: string | null;
+  afterCursor: string | null;
 }
 
 export interface ICursor {
-    name : string 
-    cursorObj : Cursor
+  name: string;
+  cursorObj: Cursor;
 }
 
 export enum OrderEnum {
-    ASC = 'ASc',
-    DESC = 'DESC',
-  }
-  export interface IOrderBy {
-    sortString: string;
-    order: 'ASC' | 'DESC';
-  }
+  ASC = 'ASc',
+  DESC = 'DESC',
+}
+export interface IOrderBy {
+  sortString: string;
+  order: 'ASC' | 'DESC';
+}

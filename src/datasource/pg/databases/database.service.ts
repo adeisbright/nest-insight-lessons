@@ -1,55 +1,62 @@
-import { Inject, Injectable, OnApplicationBootstrap } from "@nestjs/common";
-import { FindOptionsWhere, ObjectLiteral, ObjectType, Repository } from "typeorm";
-import { Product } from "../entities/product";
+import { Inject, Injectable, OnApplicationBootstrap } from '@nestjs/common';
+import {
+  FindOptionsWhere,
+  ObjectLiteral,
+  ObjectType,
+  Repository,
+} from 'typeorm';
+import { Product } from '../entities/product';
 import { REPOSITORY } from '@/constants';
-import { IOrderBy,  } from '@/shared/interfaces';
+import { IOrderBy } from '@/shared/interfaces';
 import { DataSource } from 'typeorm';
 
 export abstract class IGenericRepository<T> {
-    abstract getAll(
-        query :  FindOptionsWhere<T> , 
-        model : ObjectType<T> , 
-        projection : any , 
-    ) : Promise<T>
+  abstract getAll(
+    query: FindOptionsWhere<T>,
+    model: ObjectType<T>,
+    projection: any,
+  ): Promise<T>;
 }
 
-export class PgGenericRepository<T extends ObjectLiteral> implements IGenericRepository<T> {
-    private readonly _repository :  Repository<T> 
-    constructor(repository : Repository<T>){
-        this._repository = repository
-    }
+export class PgGenericRepository<T extends ObjectLiteral>
+  implements IGenericRepository<T>
+{
+  private readonly _repository: Repository<T>;
+  constructor(repository: Repository<T>) {
+    this._repository = repository;
+  }
 
-    getAll(
-        query: FindOptionsWhere<T>, 
-        model: ObjectType<T>, 
-        projection: any,
-        ): Promise<T> {
-            const queryBuilder : any = this._repository.createQueryBuilder() 
-            .addSelect(projection)
-            .from(model , "record") 
-            .where(query)
-            .getOne()
-            
-            return queryBuilder
+  getAll(
+    query: FindOptionsWhere<T>,
+    model: ObjectType<T>,
+    projection: any,
+  ): Promise<T> {
+    const queryBuilder: any = this._repository
+      .createQueryBuilder()
+      .addSelect(projection)
+      .from(model, 'record')
+      .where(query)
+      .getOne();
 
-    }
+    return queryBuilder;
+  }
 }
 
 export abstract class PgDataServices {
-    abstract products : IGenericRepository<Product>
+  abstract products: IGenericRepository<Product>;
 }
 
 @Injectable()
-export class SqlService  implements PgDataServices, OnApplicationBootstrap{
-    products : PgGenericRepository<Product> 
+export class SqlService implements PgDataServices, OnApplicationBootstrap {
+  products: PgGenericRepository<Product>;
 
-    constructor(
-        @Inject(REPOSITORY) private userRepository : Repository<Product>
-    ){} 
+  constructor(
+    @Inject(REPOSITORY) private userRepository: Repository<Product>,
+  ) {}
 
-    onApplicationBootstrap() {
-        this.products = new PgGenericRepository<Product>(this.userRepository)
-    }
+  onApplicationBootstrap() {
+    this.products = new PgGenericRepository<Product>(this.userRepository);
+  }
 }
 
 @Injectable()
