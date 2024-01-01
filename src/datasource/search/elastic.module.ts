@@ -1,5 +1,8 @@
 import { Module } from '@nestjs/common';
-import { ElasticsearchModule, ElasticsearchService } from '@nestjs/elasticsearch';
+import {
+  ElasticsearchModule,
+  ElasticsearchService,
+} from '@nestjs/elasticsearch';
 import { elasticConfig } from './elastic.config';
 import { SearchService } from './elastic.service';
 import { SearchController } from './elastic.controller';
@@ -9,7 +12,7 @@ import { SearchController } from './elastic.controller';
       useFactory: () => ({
         node: elasticConfig.node,
         auth: {
-          username:elasticConfig.username,
+          username: elasticConfig.username,
           password: elasticConfig.password,
         },
       }),
@@ -17,7 +20,6 @@ import { SearchController } from './elastic.controller';
   ],
   providers: [],
   exports: [ElasticsearchModule],
-  controllers : []
+  controllers: [],
 })
-
-export class SearchModule{}
+export class SearchModule {}
