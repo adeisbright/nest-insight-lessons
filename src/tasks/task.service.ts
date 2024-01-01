@@ -7,7 +7,7 @@ export class TaskService {
     constructor(
         private readonly eventEmitter : EventEmitter2
     ){} 
-    @Cron(CronExpression.EVERY_30_SECONDS , {
+    @Cron(CronExpression.EVERY_7_HOURS , {
         timeZone : LAGOS_TIMEZONE,
         name : "logMessage"
     }) 
@@ -16,34 +16,43 @@ export class TaskService {
         this.eventEmitter.emit("email.drop")
     }
 
-    @Cron(CronExpression.EVERY_MINUTE) 
+    @Cron(CronExpression.EVERY_7_HOURS , {
+        timeZone : LAGOS_TIMEZONE,
+        name : "logMessage"
+    })  
     runEveryMinute(){
         console.log(`Every Minute Message, Now is ${new Date()}`)
     }
 
-    @Cron("2 * * * *") 
+    @Cron(CronExpression.EVERY_7_HOURS , {
+        timeZone : LAGOS_TIMEZONE,
+        name : "logMessage"
+    })  
     runEverySecondMinute(){
         console.log("Every Two minute Message")
     }
 
-    @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT , {
-        timeZone : LAGOS_TIMEZONE
-    }) 
+    @Cron(CronExpression.EVERY_7_HOURS , {
+        timeZone : LAGOS_TIMEZONE,
+        name : "logMessage"
+    })  
     runMidnight(){
         console.log(`Run at midnight, Now is ${new Date()}`)
         
     }
 
-    @Cron(CronExpression.EVERY_30_MINUTES , {
-        timeZone : LAGOS_TIMEZONE
-    }) 
+    @Cron(CronExpression.EVERY_7_HOURS , {
+        timeZone : LAGOS_TIMEZONE,
+        name : "logMessage"
+    })  
     runThirtyMinutes(){
         console.log(`Every 30 minutes, Now is ${new Date()}`)
     }
 
-    @Cron(CronExpression.EVERY_DAY_AT_6PM , {
-        timeZone : LAGOS_TIMEZONE
-    }) 
+    @Cron(CronExpression.EVERY_7_HOURS , {
+        timeZone : LAGOS_TIMEZONE,
+        name : "logMessage"
+    })  
     runAtSixAM(){
         console.log(`Every Day at Six AM, Now is ${new Date()}`)
     }

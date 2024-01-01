@@ -17,6 +17,19 @@ import {BullModule} from "@nestjs/bull"
 import { bullConfig, mailConfig } from './config';
 import { QueueModule } from './queue/queue.module';
 import {MailerModule} from "@nestjs-modules/mailer"
+
+
+
+import {map,filter } from "rxjs/operators" 
+import {of} from "rxjs" 
+
+const source = of(1 , 2 , 3 , 4 , 5) 
+
+source.pipe(
+    map(x => x*2) ,
+    filter(x => x > 5)
+).subscribe(value => console.log(value))
+
 @Module({
   imports: [
     ConfigModule.forRoot({
