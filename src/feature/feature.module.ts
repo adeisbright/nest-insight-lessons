@@ -41,7 +41,7 @@ import { S3Helper } from './product/aws-s3-helper';
     },
     TableService,
     ProductService,
-    S3Helper
+    S3Helper,
   ],
   imports: [PgModule, SearchModule],
 })

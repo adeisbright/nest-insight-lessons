@@ -44,7 +44,7 @@ export class ProductService {
       return body;
     } catch (e) {
       return {
-        message: e.message, 
+        message: e.message,
       };
     }
   }
