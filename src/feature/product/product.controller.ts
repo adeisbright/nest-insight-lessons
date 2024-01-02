@@ -14,9 +14,11 @@ import {
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import {
+  AnyFilesInterceptor,
   FileFieldsInterceptor,
   FileInterceptor,
   FilesInterceptor,
+  NoFilesInterceptor,
 } from '@nestjs/platform-express';
 import * as path from 'path';
 import { diskStorage, memoryStorage } from 'multer';
@@ -84,6 +86,45 @@ export class ProductController {
           response,
           url: `https://${this.awsBucket}.s3.amazonaws.com/${originalname}`,
         },
+      });
+    } catch (e) {
+      return res.status(500).json({
+        message: e.message,
+      });
+    }
+  }
+
+  @Post('/any-file')
+  @UseInterceptors(AnyFilesInterceptor())
+  async uploadAnyFile(
+    @Res() res: any,
+    @UploadedFiles() files: Array<Express.Multer.File>,
+    @Body() body: any,
+  ) {
+    try {
+      console.log(files);
+      for (const file of files) {
+        console.log(file.mimetype, file.originalname);
+      }
+
+      return res.status(200).json({
+        message: 'Successful',
+        data: {},
+      });
+    } catch (e) {
+      return res.status(500).json({
+        message: e.message,
+      });
+    }
+  }
+
+  @Post('/no-file')
+  @UseInterceptors(NoFilesInterceptor())
+  async noFile(@Res() res: any, @Body() body: any) {
+    try {
+      return res.status(200).json({
+        message: 'No Files',
+        data: body,
       });
     } catch (e) {
       return res.status(500).json({
