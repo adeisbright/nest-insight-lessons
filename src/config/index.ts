@@ -2,8 +2,8 @@ import 'dotenv/config';
 import * as path from 'path';
 import * as aws from '@aws-sdk/client-ses';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
-import { S3Client } from "@aws-sdk/client-s3"; 
-import { fromEnv } from "@aws-sdk/credential-providers"; 
+import { S3Client } from '@aws-sdk/client-s3';
+import { fromEnv } from '@aws-sdk/credential-providers';
 
 const ses = new aws.SES({
   apiVersion: '2012-10-17',
@@ -15,16 +15,16 @@ const ses = new aws.SES({
 });
 
 export const s3Client = new S3Client({
-  credentials : fromEnv(),
-  region  : 'us-east-1',
-})
+  credentials: fromEnv(),
+  region: 'us-east-1',
+});
 
 export const appConfig = {
-  aws : {
-    bucketName : process.env.AWS_BUCKET as string ,
-    region : process.env.AWS_REGION as string 
-  }
-}
+  aws: {
+    bucketName: process.env.AWS_BUCKET as string,
+    region: process.env.AWS_REGION as string,
+  },
+};
 
 export const bullConfig = {
   redis: {
