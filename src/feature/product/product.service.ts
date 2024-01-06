@@ -2,10 +2,9 @@ import { Injectable } from '@nestjs/common';
 import {
   PgDataServices,
   TableService,
-} from '@/datasource/pg/databases/database.service';
-import { Product } from '@/datasource/pg/entities/product';
+} from '../../datasource/pg/databases/database.service';
+// import { Product } from '@/datasource/pg/entities/product';
 import { SchedulerRegistry } from '@nestjs/schedule';
-import { Express } from 'express';
 @Injectable()
 export class ProductService {
   constructor(
