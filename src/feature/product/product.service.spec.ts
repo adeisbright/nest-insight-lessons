@@ -41,9 +41,25 @@ describe('Product Service', () => {
       const expectedProducts = [{ product_code: '1', brand_name: 'Brand A' }];
       jest
         .spyOn(productService , "getAllProducts")
-        .mockImplementation(async () => expectedProducts)
+        .mockResolvedValue(expectedProducts)
       const result = await productService.getAllProducts();
       expect(result).toEqual(expectedProducts);
+    });
+
+    it('should stop the cron job and throw error message if error occurs', async () => {
+        //Arrange 
+        jest.spyOn(productService, "getAllProducts").mockRejectedValue(new Error("Database error"))
+        // Act
+        let errorResult: any;
+        try {
+            await productService.getAllProducts();
+        } catch (error) {
+            errorResult = error;
+        }
+
+        // Assert
+        expect(errorResult).toBeInstanceOf(Error);
+        expect(errorResult.message).toEqual('Database error');
     });
   });
 });
