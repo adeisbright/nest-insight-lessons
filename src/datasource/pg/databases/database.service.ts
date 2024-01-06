@@ -6,8 +6,8 @@ import {
   Repository,
 } from 'typeorm';
 import { Product } from '../entities/product';
-import { REPOSITORY } from '@/constants';
-import { IOrderBy } from '@/shared/interfaces';
+import { REPOSITORY } from '../../..//constants';
+import { IOrderBy } from '../../..//shared/interfaces';
 import { DataSource } from 'typeorm';
 
 export abstract class IGenericRepository<T> {
