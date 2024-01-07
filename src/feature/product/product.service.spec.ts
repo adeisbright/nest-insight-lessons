@@ -30,6 +30,8 @@ describe('Product Service', () => {
     }).compile();
     productService = module.get<ProductService>(ProductService);
     tableService = module.get<TableService>(TableService)
+
+    jest.resetAllMocks() //Reset all mocked values and implementations 
   });
 
   it('Should be defined', () => {
@@ -42,6 +44,7 @@ describe('Product Service', () => {
       jest
         .spyOn(productService , "getAllProducts")
         .mockResolvedValue(expectedProducts)
+        .mockName("getProductsMock")
       const result = await productService.getAllProducts();
       expect(result).toEqual(expectedProducts);
     });
