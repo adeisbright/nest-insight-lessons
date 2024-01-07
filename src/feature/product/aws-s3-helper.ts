@@ -1,6 +1,5 @@
 import { PutObjectCommand } from '@aws-sdk/client-s3';
-import { s3Client } from '@/config';
-import { appConfig } from '@/config';
+import { s3Client, appConfig } from '../../config';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

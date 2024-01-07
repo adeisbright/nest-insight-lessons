@@ -8,7 +8,7 @@ import { ProductService } from './product.service';
 
 describe('Product Service', () => {
   let productService: ProductService;
-  let tableService : TableService
+  let tableService: TableService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -29,7 +29,9 @@ describe('Product Service', () => {
       ],
     }).compile();
     productService = module.get<ProductService>(ProductService);
-    tableService = module.get<TableService>(TableService)
+    tableService = module.get<TableService>(TableService);
+
+    jest.resetAllMocks(); //Reset all mocked values and implementations
   });
 
   it('Should be defined', () => {
@@ -40,26 +42,29 @@ describe('Product Service', () => {
     it('Should return an array of products', async () => {
       const expectedProducts = [{ product_code: '1', brand_name: 'Brand A' }];
       jest
-        .spyOn(productService , "getAllProducts")
+        .spyOn(productService, 'getAllProducts')
         .mockResolvedValue(expectedProducts)
+        .mockName('getProductsMock');
       const result = await productService.getAllProducts();
       expect(result).toEqual(expectedProducts);
     });
 
     it('should stop the cron job and throw error message if error occurs', async () => {
-        //Arrange 
-        jest.spyOn(productService, "getAllProducts").mockRejectedValue(new Error("Database error"))
-        // Act
-        let errorResult: any;
-        try {
-            await productService.getAllProducts();
-        } catch (error) {
-            errorResult = error;
-        }
+      //Arrange
+      jest
+        .spyOn(productService, 'getAllProducts')
+        .mockRejectedValue(new Error('Database error'));
+      // Act
+      let errorResult: any;
+      try {
+        await productService.getAllProducts();
+      } catch (error) {
+        errorResult = error;
+      }
 
-        // Assert
-        expect(errorResult).toBeInstanceOf(Error);
-        expect(errorResult.message).toEqual('Database error');
+      // Assert
+      expect(errorResult).toBeInstanceOf(Error);
+      expect(errorResult.message).toEqual('Database error');
     });
   });
 });

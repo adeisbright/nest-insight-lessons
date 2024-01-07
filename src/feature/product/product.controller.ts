@@ -25,7 +25,7 @@ import { diskStorage, memoryStorage } from 'multer';
 import { extname } from 'path';
 import { Express } from 'express';
 import { S3Helper } from './aws-s3-helper';
-import { appConfig } from '@/config';
+import { appConfig } from '../../config';
 import { FileSizeValidationPipe } from './file.pipe';
 
 const storage = diskStorage({
