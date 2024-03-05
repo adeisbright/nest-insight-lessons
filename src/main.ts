@@ -1,10 +1,19 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-//import { GlobalErrorFilter } from './global-filter';
+import  { MicroserviceOptions, Transport } from '@nestjs/microservices'
+import { TCPModule } from './TCP.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  //app.useGlobalFilters(new GlobalErrorFilter())
-  await app.listen(3001);
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
+    TCPModule , 
+    {
+      transport : Transport.TCP , 
+      options : {
+        host:"127.0.0.1",
+        port : 3003
+      }
+    }
+  )
+  await app.listen().then(() => console.log("Running on 3003")).catch(err => console.error(err));
 }
 bootstrap();
